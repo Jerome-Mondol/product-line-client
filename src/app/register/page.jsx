@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../firebase.init.js";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa6";
 import Link from "next/link.js";
+import { googleSignin, signin } from "@/lib/auth.js";
+
+
 
 
 export default function Register() {
@@ -15,25 +16,21 @@ export default function Register() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const userCred = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCred.user, {
-        displayName: name,
-      });
-      console.log(userCred);
+      const user = await signin(name, email, password);
+      console.log(user);
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-      router.push("/dashboard");
+      const user = await googleSignin();
+      console.log(user);
     } catch (err) {
       setError(err.message);
     }
@@ -51,7 +48,7 @@ export default function Register() {
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleRegister} className="space-y-4">
             <div>
             <label className="block text-gray-700 font-medium mb-1">Email</label>
             <input

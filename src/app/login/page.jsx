@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase.init.js";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa6";
 import Link from "next/link.js";
+import { googleSignin, login } from "@/lib/auth.js";
 
 
 export default function Login() {
@@ -18,18 +17,17 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      const user = await login(email, password);
+      console.log(user);
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      router.push("/dashboard");
+    try { 
+      const user = await googleSignin();
+      console.log(user);
     } catch (err) {
       setError(err.message);
     }
