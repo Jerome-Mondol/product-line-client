@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase.init.js";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa6";
 import Link from "next/link.js";
 
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
@@ -18,8 +19,11 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCred.user, {
+        displayName: name,
+      });
+      console.log(userCred);
     } catch (err) {
       setError(err.message);
     }
@@ -48,6 +52,17 @@ export default function Login() {
         )}
 
         <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+            <label className="block text-gray-700 font-medium mb-1">Email</label>
+            <input
+              type="text"
+              placeholder="John doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="placeholder:text-gray-600 text-gray-600 w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
           <div>
             <label className="block text-gray-700 font-medium mb-1">Email</label>
             <input
@@ -76,7 +91,7 @@ export default function Login() {
             type="submit"
             className="w-full bg-indigo-600 text-white font-semibold p-3 rounded-md hover:bg-indigo-700 transition duration-200"
           >
-            Login
+            Sign up
           </button>
         </form>
 
@@ -89,13 +104,13 @@ export default function Login() {
           className="text-gray-700 w-full flex items-center justify-center border border-gray-300 rounded-md p-3 hover:bg-gray-100 transition duration-200 space-x-2"
         >
           <FaGoogle />
-          <span className="text-gray-700 font-medium">Sign in with Google</span>
+          <span className="text-gray-700 font-medium">Sign uo with Google</span>
         </button>
 
         <p className="text-center text-gray-500 text-sm mt-4">
-          Don’t have an account?{" "}
-          <Link href="/register" className="text-indigo-600 hover:underline">
-            Sign Up
+          Already have an account?{" "}
+          <Link href="/login" className="text-indigo-600 hover:underline">
+            Login
           </Link>
         </p>
       </div>

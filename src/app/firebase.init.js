@@ -1,14 +1,16 @@
+// src/app/firebase.js
 import { initializeApp } from "firebase/app";
-import { auth } from 'firebase/auth'
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.NEXT_PUBLIC_BASE_apiKey,
-  authDomain: import.meta.env.NEXT_PUBLIC_FIREBASE_authDomain,
-  projectId: import.meta.env.NEXT_PUBLIC_BASE_projectId,
-  storageBucket: import.meta.env.NEXT_PUBLIC_BASE_storageBucket,
-  messagingSenderId: import.meta.env.NEXT_PUBLIC_FIREBASE_messagingSenderId,
-  appId: import.meta.env.NEXT_PUBLIC_FIREBASE_appId,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_apiKey,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_authDomain,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_projectId,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_storageBucket,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_messagingSenderId,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_appId,
 };
+
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
