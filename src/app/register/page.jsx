@@ -101,7 +101,7 @@ export default function Register() {
           className="text-gray-700 w-full flex items-center justify-center border border-gray-300 rounded-md p-3 hover:bg-gray-100 transition duration-200 space-x-2"
         >
           <FaGoogle />
-          <span className="text-gray-700 font-medium">Sign uo with Google</span>
+          <span className="text-gray-700 font-medium">Sign up with Google</span>
         </button>
 
         <p className="text-center text-gray-500 text-sm mt-4">
