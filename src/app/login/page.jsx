@@ -19,6 +19,7 @@ export default function Login() {
     try {
       const user = await login(email, password);
       console.log(user);
+      router.push('/');
     } catch (err) {
       setError(err.message);
     }
@@ -28,6 +29,7 @@ export default function Login() {
     try { 
       const user = await googleSignin();
       console.log(user);
+      router.push('/')
     } catch (err) {
       setError(err.message);
     }

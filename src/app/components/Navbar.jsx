@@ -1,12 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { logOut } from "@/lib/auth";
 
 export function Navbar({ isLoggedIn = false, loading }) {
   const [user, setUser] = useState(isLoggedIn || null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    // Simulate checking auth status
+    setIsLoading(false);
+  }, []);
 
   const publicLinks = [
     { label: "Home", path: "/" },
@@ -30,6 +36,39 @@ export function Navbar({ isLoggedIn = false, loading }) {
     await logOut();
     setUser(null);
     setIsMenuOpen(false); 
+  }
+
+  // Show loading skeleton while checking auth
+  if (isLoading) {
+    return (
+      <nav className="fixed top-0 w-full bg-white shadow-lg z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="text-2xl font-bold text-blue-600">ProductLine</div>
+            </div>
+
+            <div className="hidden md:flex items-center space-x-8">
+              {/* Loading skeleton for links */}
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+              ))}
+              
+              {/* Loading skeleton for auth buttons */}
+              <div className="flex items-center space-x-4">
+                <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-10 w-20 bg-gray-200 rounded-lg animate-pulse"></div>
+              </div>
+            </div>
+
+            {/* Mobile menu skeleton */}
+            <div className="md:hidden p-2">
+              <div className="w-6 h-6 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
   }
 
   return (
