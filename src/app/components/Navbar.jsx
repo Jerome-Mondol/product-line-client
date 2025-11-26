@@ -23,7 +23,7 @@ export function Navbar({ isLoggedIn = false, loading }) {
   ];
 
   const privateLinks = [
-    { label: "Dashboard", path: "/dashboard" },
+    { label: "Dashboard", path: "/" },
     { label: "Products", path: "/products" },
     { label: "Add Product", path: "/add-product" },
     { label: "My Products", path: "/my-products" },
