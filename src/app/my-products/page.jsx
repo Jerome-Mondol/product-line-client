@@ -43,7 +43,7 @@ export default async function MyProducts() {
               <p className="mt-1 text-sm text-gray-600">
                 Manage your product listings and inventory
               </p>
-            </div>
+            </div> 
             <div className="mt-4 sm:mt-0 flex space-x-3">
               <Link
                 href="/products/new"
