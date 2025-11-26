@@ -38,7 +38,7 @@ export default async function MyProducts() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <div>
+            <div>  
               <h1 className="text-2xl font-bold text-gray-900">My Products</h1>
               <p className="mt-1 text-sm text-gray-600">
                 Manage your product listings and inventory
