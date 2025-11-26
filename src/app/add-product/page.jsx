@@ -32,7 +32,6 @@ export default function AddProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await createProductInDB(formData);
-        console.log("Product data:", formData);
         alert("Product added!");
         setFormData({
             title: "",

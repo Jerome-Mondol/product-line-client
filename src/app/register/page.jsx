@@ -21,7 +21,7 @@ export default function Register() {
     setError("");
     try {
       const user = await signin(name, email, password);
-      console.log(user);
+      (user);
       router.push('/')
     } catch (err) {
       setError(err.message);
@@ -31,7 +31,6 @@ export default function Register() {
   const handleGoogleSignIn = async () => {
     try {
       const user = await googleSignin();
-      console.log(user);
       router.push('/')
     } catch (err) {
       setError(err.message);

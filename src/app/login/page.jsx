@@ -18,7 +18,6 @@ export default function Login() {
     setError("");
     try {
       const user = await login(email, password);
-      console.log(user);
       router.push('/');
     } catch (err) {
       setError(err.message);
@@ -28,7 +27,7 @@ export default function Login() {
   const handleGoogleSignIn = async () => {
     try { 
       const user = await googleSignin();
-      console.log(user);
+      (user);
       router.push('/')
     } catch (err) {
       setError(err.message);

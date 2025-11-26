@@ -6,7 +6,6 @@ export const createUserInDB = async (userCred) => {
     const res = axiosInstance.post('/users/create-user',
         { email, displayName, uid }
     )
-    console.log(res);
     }
     catch (err) {
         console.log(err);

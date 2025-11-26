@@ -2,14 +2,14 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://product-line-server.onrender.com/",
     headers: {
         "Content-Type": "application/json",
     }
 })
 
 export const secureAxiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://product-line-server.onrender.com/",
     headers: {
         "Content-Type": "application/json",
     },
